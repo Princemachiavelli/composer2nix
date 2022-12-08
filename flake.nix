@@ -29,6 +29,6 @@
         apps.composer2nix = app;
         apps.composer2nix-noDev = app-noDev;
         defaultApp = app;
-        inherit overlays;
+        overlays.default = overlays;
       });
 }
