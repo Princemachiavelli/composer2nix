@@ -3,9 +3,8 @@
   }, system ? builtins.currentSystem, noDev ? false, php ? pkgs.php, phpPackages ? pkgs.phpPackages}:
 
 let
-  composerEnv = import ./src/Composer2Nix/composer-env.nix {
-    inherit (pkgs) stdenv lib writeTextFile fetchurl unzip;
-    inherit php phpPackages;
+  composerEnv = import ./composer-env.nix {
+    inherit (pkgs) stdenv lib writeTextFile fetchurl php unzip phpPackages;
   };
 in
 import ./php-packages.nix {
