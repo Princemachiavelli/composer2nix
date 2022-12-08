@@ -17,7 +17,7 @@ let
 in
 composerEnv.buildPackage {
   inherit packages devPackages noDev;
-  name = "svanderburg-composer2nix";
+  name = "composer2nix";
   src = composerEnv.filterSrc ./.;
   executable = true;
   symlinkDependencies = false;
