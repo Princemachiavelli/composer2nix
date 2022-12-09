@@ -20,19 +20,21 @@
           overlays = [ self.overlays.default ];
         };
       in with pkgs; rec {
-        app = flake-utils.lib.mkApp {
-          drv = composer2nix;
-          exePath = "/bin/composer2nix";
+        packages = with pkgs; {
+          composer2nix = composer2nix;
+          composer2nix-noDev = composer2nix-noDev;
+          default = composer2nix-noDev;
         };
-        app-noDev = flake-utils.lib.mkApp {
-          drv = composer2nix-noDev;
-          exePath = "/bin/composer2nix";
+        apps = rec {
+          composer2nix = flake-utils.lib.mkApp {
+            drv = composer2nix;
+            exePath = "/bin/composer2nix";
+          };
+          composer2nix-noDev = flake-utils.lib.mkApp {
+            drv = composer2nix-noDev;
+            exePath = "/bin/composer2nix";
+          };
+          default = composer2nix-noDev;
         };
-        packages.composer2nix = composer2nix;
-        packages.composer2nix-noDev = composer2nix-noDev;
-        defaultPackage = composer2nix;
-        apps.composer2nix = app;
-        apps.composer2nix-noDev = app-noDev;
-        defaultApp = app;
       });
 }
